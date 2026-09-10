@@ -1,0 +1,35 @@
+{
+    "application": {
+        "id": "",
+        "title": "PO_MAINTENANCE",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#flp-runApp?html5App=pomaintenance&SAPUI5.Component=PO_MAINTENANCE&url=/",
+        "navigationComponentName": "PO_MAINTENANCE",
+        "intentSemanticObject": "ZPMORDERCONF",
+        "intentAction": "DISPLAY_G",
+        "html5ApplicationName": "pomaintenance",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [],
+        "contentPackages": [
+            "323a62a8-857b-445c-99a0-57bcacc950d0-1425999481488"
+        ],
+        "categories": [
+            "118ee4a0-fd97-444f-95bf-83b021c444f2-1425999804844"
+        ]
+    },
+    "tile": {
+        "type": "DynamicTile",
+        "title": "Maintenance Curative",
+        "subtitle": "",
+        "searchKeywords": "Maintenance Curative,",
+        "displayIconUrl": "sap-icon://approvals",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "/sap/fiori/pomaintenance/sap/opu/odata/sap/ZGPM_CONFIRM_ORDER_SRV/ORDERLISTSet/$count",
+        "refreshInterval": 10,
+        "displayNumberUnit": "ORDERLIST"
+    }
+}

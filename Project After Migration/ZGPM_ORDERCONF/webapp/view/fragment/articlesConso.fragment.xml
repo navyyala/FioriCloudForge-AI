@@ -1,0 +1,201 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:cust="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns="sap.m">
+	<l:VerticalLayout class="sapUiResponsivePadding">
+		<Table id="tableItems" noDataText="{18n>textFragmentTableNoPoste}" items="{ path: 'orderitem>/GOODS_ISSUESet', filters: [ { path: 'Returns', operator: 'EQ', value1: '' } ] }" class="sapUiLargeMarginTop" updateFinished="onItemsLoaded"
+			headerText="{i18n>textBtnStock}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="{i18n>textBtnStock}" />
+				<ToolbarSpacer/>
+					<Button press=".stockOutputHelper.onAddStock" icon="sap-icon://add" type="Transparent">
+						<customData>
+							<core:CustomData key="stockType" value="StockOutput"/>
+						</customData>
+					</Button>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column id="colArticleNo" width="22%">
+					<header>
+						<Label id="lblArticleNo" text="{i18n>textFragmentLblArticleNumber}"/>
+					</header>
+				</Column>
+				<Column id="colDescription" width="65%">
+					<header>
+						<Label id="lblDescription" text="{i18n>textFragmentLblDescription}"/>
+					</header>
+				</Column>
+				<Column id="colQuantite" width="30%">
+					<header>
+						<Label id="lblQuantite" text="{i18n>libColQuantite}"/>
+					</header>
+				</Column>
+				<Column id="colUnite" width="25%">
+					<header>
+						<Label id="lblUnite" text="{i18n>textFragmentLblUnity}"/>
+					</header>
+				</Column>
+				<!--JII 6585 -->
+				<Column id="colStorageLoc" width="30%">
+					<header>
+						<Label id="lblStorageLoc" text="{i18n>libColStorageLoc}"/>
+					</header>
+				</Column>
+				<Column id="colStorageBin" width="30%">
+					<header>
+						<Label id="lblStorageBin" text="{i18n>libColStorageBin}"/>
+					</header>
+				</Column>
+				<!--  NEW: Condition column  -->
+				<!-- Start JII-7074 new field  -->
+				<Column id="colCondition" width="25%">
+					<header>
+						<Label id="lblCondition" text="{i18n>textFragmentLblCondition}"/>
+					</header>
+				</Column>
+				<!-- End JII-7074  -->
+				<Column id="colDelete" width="30%">
+					<header>
+						<Label id="lblDelete" text=" "/>
+					</header>
+				</Column>
+				<!--JII 6585 end-->
+			</columns>
+			<items>
+				<ColumnListItem id="articleTemplate">
+					<cells>
+						<Text id="txtArticleNo" text="{path: 'orderitem>Matnr', formatter: '.removeLeadingZeros'}"/>
+						<Text id="txtDescription" text="{orderitem>Maktx}"/>
+						<Text id="txtQuantite" text="{orderitem>Quantity}"/>
+						<Text id="txtUnite" text="{orderitem>Meins}"/>
+						<!--JII 6585 -->
+						<Text id="txtStorageLoc" text="{orderitem>Lgort}"/>
+						<Text id="txtStorageBin" text="{orderitem>Lgpbe}"/>
+						<!-- Start JII-7074  -->
+						<Text id="txtCondition" text="{orderitem>Bwtar}"/>
+						<!-- End JII-7074  -->
+						<Button icon="sap-icon://delete" press=".stockOutputHelper.onDeleteStockOutput"/>
+						<!--JII 6585 end-->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!-- Start JII-7074 added stock return table  -->
+		<Table id="tableItemsStockReturn" noDataText="{i18n>textFragmentTableNoPoste}" items="{ path: 'orderitem>/GOODS_ISSUESet', filters: [ { path: 'Returns', operator: 'EQ', value1: 'X' } ] }"
+		 headerText="{i18n>textBtnStockReturn}">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="{i18n>textBtnStockReturn}" />
+				<ToolbarSpacer/>
+					<Button press=".stockOutputHelper.onAddStock" icon="sap-icon://add" type="Transparent">
+						<customData>
+							<core:CustomData key="stockType" value="StockReturn"/>
+						</customData>
+					</Button>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="22%">
+					<header>
+						<Label text="{i18n>textFragmentLblArticleNumber}"/>
+					</header>
+				</Column>
+				<Column width="65%">
+					<header>
+						<Label text="{i18n>textFragmentLblDescription}"/>
+					</header>
+				</Column>
+				<Column width="30%">
+					<header>
+						<Label text="{i18n>libColQuantite}"/>
+					</header>
+				</Column>
+				<Column width="25%">
+					<header>
+						<Label text="{i18n>textFragmentLblUnity}"/>
+					</header>
+				</Column>
+				<Column width="30%">
+					<header>
+						<Label text="{i18n>libColStorageLoc}"/>
+					</header>
+				</Column>
+				<Column width="30%">
+					<header>
+						<Label text="{i18n>libColStorageBin}"/>
+					</header>
+				</Column>
+				<!--  Condition  -->
+				<Column width="25%">
+					<header>
+						<Label text="{i18n>textFragmentLblCondition}"/>
+					</header>
+				</Column>
+				<Column width="30%">
+					<header>
+						<Label text=" "/>
+					</header>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{path: 'orderitem>Matnr', formatter: '.removeLeadingZeros'}"/>
+						<Text text="{orderitem>Maktx}"/>
+						<Text text="{path: 'orderitem>Quantity', formatter: '.stockOutputHelper.formatPositive'}"/>
+						<Text text="{orderitem>Meins}"/>
+						<Text text="{orderitem>Lgort}"/>
+						<Text text="{orderitem>Lgpbe}"/>
+						<Text text="{orderitem>Bwtar}"/>
+						<Button icon="sap-icon://delete" press=".stockOutputHelper.onDeleteStockOutput"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!-- End JII-7074  -->
+		<Table id="billOfMaterialTable" noDataText="{18n>textFragmentTableNoPoste}"
+		items="{orderitem>/goods_issue_bomSet}"  class="sapUiLargeMarginTop"
+			headerText="{i18n>textBoM}">
+			<columns>
+				<Column id="colArticleNoBoM" width="15%">
+					<header>
+						<Label id="lblArticleNoBoM" text="{i18n>textFragmentLblArticleNumber}"/>
+					</header>
+				</Column>
+				<Column id="colDescriptionBoM" width="30%">
+					<header>
+						<Label id="lblDescriptionBoM" text="{i18n>textFragmentLblDescription}"/>
+					</header>
+				</Column>
+				<Column id="colQuantiteBoM" width="30%">
+					<header>
+						<Label id="lblQuantiteBoM" text="{i18n>libColQuantite}"/>
+					</header>
+				</Column>
+				<Column id="colUniteBoM" width="25%">
+					<header>
+						<Label id="lblUniteBoM" text="{i18n>textFragmentLblUnity}"/>
+					</header>
+				</Column>
+				<Column id="colDeleteBoM" width="30%">
+					<header>
+						<Label id="lblDeleteBom" text=" "/>
+					</header>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem id="articleTemplateBoM">
+					<cells>
+						<Text id="txtArticleNoBoM" text="{path: 'orderitem>Matnr', formatter: '.removeLeadingZeros'}"/>
+						<Text id="txtDescriptionBoM" text="{orderitem>Maktx}"/>
+						<Text id="txtQuantiteBoM" text="{orderitem>Quantity}"/>
+						<Text id="txtUniteBoM" text="{orderitem>Meins}"/>
+						<!--JII 6585 -->
+						<Button icon="sap-icon://add" press=".stockOutputHelper.onAddStockOutout"/>
+						<!--JII 6585 end-->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

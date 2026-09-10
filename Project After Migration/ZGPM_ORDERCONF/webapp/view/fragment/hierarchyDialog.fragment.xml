@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"
+	xmlns:cust="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>textLblRechHierarchie}">
+		<content>
+			<Text text="Element selected: {selectedTplnr>/value}" class="sapUiSmallMargin" />
+			<!--Navigation path list-->
+			<List class="listNav" id="listNav" items="{path: '/FUNCPARENTSet'}" mode="SingleSelectMaster" noDataText=" " selectionChange="onSelectNav">
+				<items>
+					<ObjectListItem counter="0" cust:name="{Name}" cust:level="{Level}" markFavorite="false" markFlagged="false" number=""
+						numberUnit="" press="onSelectNav" showMarkers="false" title="{Description}" type="{device&gt;/listItemType}"></ObjectListItem>
+				</items>
+			</List>
+			<!--Navigation main list-->
+			<List id="list" mode="SingleSelectMaster" items="{path: '/FUNCLEVELSet'}" selectionChange="onSelect">
+				<items>
+					<ObjectListItem counter="0" cust:lowerLevel="{LowerLevel}" cust:orderAllowed="{OrderAllowed}" cust:objType="{ObjType}" cust:color="{Color}"
+						id="mainListItem" markFavorite="false" markFlagged="false" number="" numberUnit="" press="onSelect"
+						showMarkers="false" title="{ObjType} - {Description}" type="{device&gt;/listItemType}"></ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<beginButton>
+			<Button text="OK" press="onConfirmHierarchy"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="handleHierarchyDialogClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

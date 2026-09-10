@@ -1,0 +1,60 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<VBox>
+	<UploadCollection beforeUploadStarts="onBeforeUploadStarts" change="onChange" fileDeleted="onFileDeleted" id="uploads" items="{/ATTACHSet}"
+		noDataText="{i18n>noAttacmentFound}" showSeparators="All" uploadComplete="onUploadComplete" uploadEnabled="true"
+		uploadUrl="/sap/opu/odata/sap/ZGPM_CONFIRM_ORDER_SRV/ATTACHSet">
+		<items>
+			<UploadCollectionItem documentId="{DocNum}" enableDelete="true" enableEdit="false" fileName="{Dktxt}"
+				url="/sap/opu/odata/sap/ZGPM_CONFIRM_ORDER_SRV/ATTACHSet(DocNum='{DocNum}',Tplnr='{Tplnr}',Aufnr='{Aufnr}',Equnr='{Equnr}',Dktxt='{Dktxt}')/$value"
+				visibleDelete="true" visibleEdit="false"></UploadCollectionItem>
+		</items>
+	</UploadCollection>
+	<Table id="attachments" items="{/doclistSet}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<!--<Button text="{i18n>uploadAttachment}" press="onUploadAttachment"/>-->
+				<Title text="{i18n>attachmentHeader}" />
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column id="doctype">
+				<header>
+					<Label id="lblAttachDoctype" text="{i18n>textFragmentLblDocType}"/>
+				</header>
+			</Column>
+			<Column id="docNbr">
+				<header>
+					<Label id="lblDocNbr" text="{i18n>textFragmentLblDocNb}"/>
+				</header>
+			</Column>
+			<Column id="version">
+				<header>
+					<Label id="lblattachVersion" text="{i18n>textFragmentLblDocVersion}"/>
+				</header>
+			</Column>
+			<Column id="status">
+				<header>
+					<Label id="lblattachStatus" text="{i18n>textFragmentLblDocStatus}"/>
+				</header>
+			</Column>
+			<Column id="description">
+				<header>
+					<Label id="lblattacheDes" text="{i18n>textFragmentLblDocDescription}"/>
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem press="onAttachmentPress" type="Navigation">
+				<cells>
+					<Text text="{DocType}" />
+					<Text text="{DocID}" />
+					<Text text="{DocVersion}" />
+					<Text text="{DocStatus}" />
+					<Text text="{DocDescr}" />
+				</cells>
+				
+			</ColumnListItem>
+		</items>
+	</Table>
+	</VBox>
+</core:FragmentDefinition>

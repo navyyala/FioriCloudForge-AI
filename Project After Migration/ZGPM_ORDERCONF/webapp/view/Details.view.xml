@@ -1,0 +1,179 @@
+﻿<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns="sap.m"
+	controllerName="PO_MAINTENANCE.controller.Details">
+	<Page id="DetailsPage" navButtonPress="onNavBack" showNavButton="false" title="{i18n>detailTitle} {Aufnr}">
+		<content>
+			<!-- Formulaitre d'information -->
+			<f:SimpleForm columnsL="1" columnsM="1" columnsXL="1" editable="false" layout="ResponsiveGridLayout">
+				<f:content>
+				
+					<!--<Label id="lbl_posteTechnique" text="{i18n>textLblPosteTechnique}"/>
+					<Text id="txt_posteTechnique" text="{Tplnr} - {Tplnrtxt}" class="headerTxt"/> -->
+					<!-- JII-3786 Functinal location should be editable only for ZM17 Corrective Order -->
+					<Label id="lbl_posteTechnique" text="{i18n>textLblPosteTechnique}"/>
+					<Input id="txt_posteTechnique" width="60%" showValueHelp="true" valueHelpRequest="onPosteTechniqueValueHelpRequest" enabled="false"/>
+					<!--	<Label id="lbl_equipement" text="{i18n>textLblEquipement}"/>
+					<Text id="txt_equipement" text="{path:'Equnr', formatter:'.removeLeadingZeros'} - {Equnrtxt}" class="headerTxt"/> -->
+					<!-- JII-3786 Equipment should be editable only for ZM17  Corrective Order -->
+					<Label id="lbl_equipement" text="{i18n>textLblEquipement}"/>
+					<Input id="txt_equipement" width="60%" value="{path:'Equnr', formatter:'.removeLeadingZeros'} - {Equnrtxt}" showValueHelp="true"
+						valueHelpRequest="onEquipementValueHelpRequest" enabled="false"/>
+					<!--<Label id="lbl_actType" text="{i18n>textLblTypeActivite}"/>-->
+					<!--<Text id="txt_actType" text="{= !(${ActDesc}) ? ${Ilart} : ${ActDesc} }" class="headerTxt"/>-->
+					<!--<Label />-->
+					<!--<Button press="onFuncEquiVHOpen" icon="sap-icon://value-help" width="3em"/>-->
+					<Label text="{i18n>textLblDescription}"/>
+					<TextArea id="txt_description" value="{Description}" width="100%" enabled="true"/>
+					<!-- Start JII-7020 -->
+					<!-- Technician -->
+					<!--<Label text="{i18n>textLblIntervenant}"/>-->
+					<!--<ComboBox id="cb_intervenant" enabled="{userMode>/edit}" items="{ path: '/OWNERSet' }" selectedKey="{Pernr}" width="40%"-->
+					<!--	selectionChange="intervenantSelected">-->
+					<!--	<core:Item key="{Pernr}" text="{Ename}"/>-->
+					<!--</ComboBox>-->
+					<!--<HBox justifyContent="End">-->
+					<!--	<Button id="btn_priseEnCharge" text="{i18n>priseEnChargeBtn}" iconFirst="true" width="200px"-->
+					<!--		icon="{= (${Status} === 'A') ? 'sap-icon://accept' : 'sap-icon://alert'}" type="{= (${Status} === 'A') ? 'Accept' : 'Reject'}"-->
+					<!--		press="onTakeOverBtnPress"/>-->
+					<!--</HBox>-->
+				
+					<Label text="{i18n>textLblIntervenant}"/>
+					<HBox alignItems="Center" width="100%">
+						<!-- LEFT: Technician + Assign to -->
+						<HBox alignItems="Center">
+							<ComboBox id="cb_intervenant" enabled="{userMode>/edit}" items="{ path: '/OWNERSet' }" selectedKey="{Pernr}" width="220px"
+								class="sapUiSmallMarginEnd" selectionChange="intervenantSelected">
+								<core:Item key="{Pernr}" text="{Ename}"/>
+							</ComboBox>
+							<Button id="btn_assignTo" text="{i18n>assignTo}" width="130px"
+								class="sapUiSmallMarginEnd" press="onAssignToPress"/>
+						</HBox>
+						 
+						<ToolbarSpacer/>
+						
+						<HBox width="100%" justifyContent="End" alignItems="Center" class="sapUiSmallMarginEnd">
+							<!-- Responsible label (BOLD) -->
+							<Text text="{i18n>responsible}:" class="sapUiTextBold sapUiSmallMarginEnd"/>
+							<!-- Editable input aligned to right edge -->
+							<Input id="inpResponsible" value="{TakName}" width="200px" editable="false"/>
+						</HBox>
+					</HBox>
+					<!--  End of JII-7020 -->
+					<!-- Start JII-3786 -->
+					<Label text="{i18n>BreakdownStartDate}" visible="true"/>
+					<DatePicker displayFormat="short" editable="true" width="50%" enabled="false" visible="false" id="breakdownstartdateid"
+						change="onDateChange"/>
+					<Label text="{i18n>BreakdownStartTime}" visible="true"/>
+					<TimePicker id="breakdownstarttimeid" displayFormat="HH:mm:ss" enabled="false" visible="false" width="50%" change="onTimeChange"/>
+					<!--  End of JII-3786 -->
+					<!-- Start  JII -4190 -->
+					<!--<Label text="{i18n>NotificationFailureDate}" visible="true"/>
+					<DatePicker displayFormat="short" editable="true" enabled="false" visible="false" id="notiffailuredateid" change="onDateChange"/>
+					<Label text="{i18n>NotificationFailureTime}" visible="true"/>
+					<TimePicker id="notiffailuretimeid" displayFormat="HH:mm:ss" enabled="false" visible="false" width="50%" change="onTimeChange"/>-->
+					<Label text="{i18n>ActivityStartDate}" visible="true"/>
+					<DatePicker displayFormat="short" editable="true" enabled="true" visible="false" id="activitydateid" change="onActivityDateChange"  width="50%"/>
+					<Label text="{i18n>ActivityStartTime}" visible="true"/>
+					<TimePicker id="activitytimeid" displayFormat="HH:mm:ss" editable="true" visible="false" width="50%" change="onTimeChange"/>
+					<!--END JII-4190 -->
+					<Label text="{i18n>textLblInterventionTime}"/>
+					<Input id="num_tempsTotalIntervention" enabled="{userMode>/edit}" type="Number" width="10%" liveChange="inputChanged"
+						placeholder="{i18n>textPlaceHolderTimeUnit}"/>
+					<Label text="{i18n>textLblStopTime}"/>
+						<!--<Input id="num_tempsArret" enabled="{userMode>/edit}" type="Number" width="30%" liveChange="inputChanged"-->
+						<!--	placeholder="{i18n>textPlaceHolderTimeUnit}"/>-->
+					<HBox id="breadDownTimeData">
+						<Input id="num_tempsArret" enabled="{userMode>/edit}" type="Number" width="100%" liveChange="inputChanged"
+							placeholder="{i18n>textPlaceHolderTimeUnit}" class="sapUiSmallMarginEnd"/>
+							<Label text="{i18n>brkDwnDuration} "  class="sapUiSmallMarginBegin"/>
+							<Input enabled="false"  class="sapUiSmallMarginBegin" value="{BrkdwnDuration}"/>
+					</HBox>
+					<!--JII-4410 RAGOW BEGIN-->
+						<!--<VBox class="sapUiSmallMarginEnd">-->
+						<!--		<layoutData>-->
+						<!--			<l:GridData linebreakL="true" linebreakM="true" linebreakS="true" span="L6 M6 S12"/>-->
+						<!--		</layoutData>-->
+								
+						<!--	</VBox>-->
+					
+							<Label text="{i18n>textFragmentLblCatFunc}"/>
+								<ComboBox id="cb_CatFunc" enabled="{userMode>/edit}" items="{path : '/FUNCTIONSet'}" selectionChange="onFunctionCatChange" selectedKey="{Function}"  visible="false" >
+									<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+								</ComboBox>
+									<!--<Label text="{i18n>textFragmentLblFunCode}"/>-->
+								<ComboBox id="cb_FunCode" items="{path : '/FUNCTIONCODESet'}" enabled="true" visible="false"  selectedKey="{FunctionCode}"   >
+									<core:Item key="{Code}" text="{Code} - {Kurztext}"/>
+								</ComboBox>
+							<!--<VBox>-->
+							
+							<!--	<layoutData>-->
+							<!--		<l:GridData span="L6 M6 S12"/>-->
+							<!--	</layoutData>-->
+							
+							<!--</VBox>-->
+					<!--JII 4410 RAGOW END-->
+					
+					<!--Failure -->
+					<Label text="{i18n>textLblFailCode}"/>
+					<ComboBox id="cb_fail" enabled="{userMode>/edit}" items="{ path: '/WORKGROUPSet' }" selectedKey="{Fegrp}"
+						selectionChange="handleWorkGroupChange">
+						<core:Item key="{Codegruppe}" text="{Grouptext}"/>
+					</ComboBox>
+					<ComboBox id="cb_failcode" items="{ path: '/WORKTYPESet' }" selectedKey="{Fecod}" enabled="false">
+						<core:Item key="{Code}" text="{Kurztext}"/>
+					</ComboBox>
+					<!-- Cause -->
+					<Label text="{i18n>textLblCauseCode}"/>
+					<ComboBox id="cb_cause" enabled="{userMode>/edit}" items="{ path: '/CAUSESet' }" selectedKey="{Urgrp}"
+						selectionChange="handleCauseGroupChange">
+						<core:Item key="{Codegruppe}" text="{Grouptext}"/>
+					</ComboBox>
+					<ComboBox id="cb_causecode" items="{ path: '/CAUSECODESet' }" selectedKey="{Urcod}" enabled="false">
+						<core:Item key="{Code}" text="{Kurztext}"/>
+					</ComboBox>
+					<!--<CheckBox text="Poka Yokes"   id="cb_pokayokes" visible="{= ${Disp_pokayokes} === 'X'}" />-->
+					<!--<CheckBox text="Safety"   id="cb_safety" visible="{= ${Disp_safety} === 'X'}" />-->
+				</f:content>
+			</f:SimpleForm>
+			<IconTabBar id="itbMain" selectedKey="itbSelKey" select="onItbSelect">
+				<items>
+					<!--Tab items-->
+					<IconTabFilter icon="sap-icon://activity-individual" id="filterItems" text="{i18n>textIconTabActivity}" key="activity">
+						<content></content>
+					</IconTabFilter>
+					<!--Tab Attachments-->
+					<IconTabFilter icon="sap-icon://attachment" iconColor="Default" id="filterAttachment" text="{i18n>textIconTabAttachments}">
+						<content></content>
+					</IconTabFilter>
+					<!--Tab open orders-->
+					<IconTabFilter icon="sap-icon://message-information" iconColor="Default" id="filterDetails" text="{i18n>textIconTabDetails}">
+						<content></content>
+					</IconTabFilter>
+					<!--Tab articles consommÃ©s -->
+					<IconTabFilter icon="sap-icon://product" iconColor="Default" id="filterArticles" text="{i18n>textIconTabStock}" key="stock" visible="true">
+						<content></content>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://future" iconColor="Default" id="filterIATFCounter" text="{i18n>textIconTabIATFCounter}" key="IATFCounter"
+						visible="false">
+						<content></content>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://future" iconColor="Default" id="filterMaintenanceCounter" text="{i18n>textIconTabMaintenanceCounter}"
+						key="MaintenanceCounter" visible="false">
+						<content></content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer/>
+				<!--<Button press="onValider" text="Valider"/>	-->
+				<!--<Button id="btnStock" press="onStock" text="{i18n>textBtnStock}" enabled="{userMode>/edit}" visible="false"/>-->
+				<Button id="btnCalculate" press="onCalculate" text="{i18n>Calculate}" visible="false"/>
+				<Button id="btnMaintCalculate" press="onMaintCalculate" text="{i18n>Calculate}" visible="false"/>
+				<Button id="btnConfirm" press="onCheckConfirmed" text="{i18n>textBtnConfirmed}" enabled="{userMode>/edit}"/>
+				<Button press="onQuitter" text="{i18n>textBtnExit}"/>
+				<Button press="onRbResetter" text="{i18n>ResetSelection}"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

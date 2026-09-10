@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<!--<Dialog id="comments">-->
+		<FeedInput post="onPostComments" icon="sap-icon://employee" class="sapUiSmallMarginTopBottom"/>
+		<List showSeparators="Inner" items="{tocomments}">
+			<FeedListItem sender="{Author}" iconDensityAware="false"
+				info="Final: {RecHrs}(MIN)" timestamp="path: {'YDate', formatter: '.convertDate'}" text="{CommentsDis}" />
+		</List>
+	<!--</Dialog>-->
+</core:FragmentDefinition>

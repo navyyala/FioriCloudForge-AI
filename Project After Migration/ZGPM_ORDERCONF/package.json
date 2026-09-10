@@ -1,0 +1,23 @@
+{
+  "name": "zgpm-orderconf",
+  "version": "1.1.0",
+  "description": "CMMS Corrective Order Confirmation",
+  "scripts": {
+    "start": "ui5 serve -o index.html",
+    "start-local": "ui5 serve --config ui5-local.yaml -o index.html",
+    "start-gwq": "ui5 serve --config ui5-gwq.yaml -o index.html",
+    "start-corrective": "ui5 serve --config ui5-gwq.yaml -o \"test/flpSandbox.html#ZPMORDERCONF-DISPLAY_G?apptype=C&ordertype=ZM17\"",
+    "start-preventive": "ui5 serve --config ui5-gwq.yaml -o \"test/flpSandbox.html#ZPMORDERCONF-DISPLAY_G?apptype=P&ordertype=ZM16\"",
+    "start-predictive": "ui5 serve --config ui5-gwq.yaml -o \"test/flpSandbox.html#ZPMORDERCONF-DISPLAY_G?apptype=P&ordertype=ZM19\"",
+    "start-maintenance": "ui5 serve --config ui5-gwq.yaml -o \"test/flpSandbox.html#ZPMORDERCONF-DISPLAY_G?apptype=P&ordertype=ZM18\"",
+    "build": "ui5 build --clean-dest",
+    "deploy": "npm run build && ui5 deploy --config ui5-deploy.yaml --yes",
+    "lint": "ui5lint"
+  },
+  "devDependencies": {
+    "@sap/ux-ui5-tooling": "^1.30.0",
+    "@ui5/cli": "^4.0.62",
+    "@ui5/linter": "^1.23.5",
+    "ui5-middleware-simpleproxy": "^0"
+  }
+}

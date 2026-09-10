@@ -1,0 +1,77 @@
+<core:FragmentDefinition xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<f:SimpleForm id="SimpleFormDisplay480"
+				minWidth="1024"
+				maxContainerCols="2"
+				editable="false"
+				layout="ResponsiveGridLayout"
+				labelSpanL="4"
+				labelSpanM="4"
+				emptySpanL="0"
+				emptySpanM="0"
+				columnsL="2"
+				columnsM="2"
+				class="sapUiContentPadding">
+				<f:content>
+					<core:Title text="" class="sapUiTinyMargin"/>
+					<Label text="{i18n>textFragmentLblPriority}"  class="sapUiTinyMargin"/>
+					<!--<Text text="{Priok} {Prioktxt}"  class="sapUiTinyMargin"/>-->
+					<ComboBox items="{ path: '/PRIORITYSet' }" selectedKey="{Priok}" class="inputsAndCombos" editable="false">
+						<core:Item key="{Prior}" text="{Prior} {Description}"/>
+					</ComboBox>
+					<!--<Label text="{i18n>textFragmentLblWorkType}" class="sapUiTinyMargin"/>-->
+					<!--<Text text="{Kurztext}" class="sapUiTinyMargin"/>-->
+					<Label text="{i18n>textFragmentLblPlanNumber}" class="sapUiTinyMargin"/>
+					<!--<Text text="{path: 'Warpl', formatter: '.removeLeadingZeros'}" class="sapUiTinyMargin"/>-->
+						<Text text="{Warpl}" class="sapUiTinyMargin"/>
+					<!--<Label text="{i18n>textFragmentLblActivityType}" class="sapUiTinyMargin"/>-->
+					<!--<Text text="{Ilart}" class="sapUiTinyMargin"/>-->
+					<core:Title text="" class="sapUiTinyMargin"/>
+					<Label text="{i18n>textFragmentLblEmetteur}" class="sapUiTinyMargin"/>
+					<Text text="{Qmnam}" class="sapUiTinyMargin"/>
+					<Label text="{i18n>textFragmentLblIntervenant}" class="sapUiTinyMargin"/>
+					
+					
+					<Label text="{i18n>textFragmentLblCatFunc}" class="sapUiTinyMargin"/>
+					<ComboBox id="cb_CatFunc" items="{path : '/FUNCTIONSet'}" selectedKey="{Otgrp}" editable="false" class="inputsAndCombos">
+						<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+					</ComboBox>
+				
+			
+					<Label text="{i18n>textFragmentLblFunCode}" class="sapUiTinyMargin"/>
+					<!--<ComboBox id="cb_FunCode" items="{path : '/FUNCTIONCODESet'}" selectedKey="{Oteil}" editable="false" class="inputsAndCombos">-->
+					<!--	<core:Item key="{Oteil}" text="{Oteil} - {Kurztext}"/>-->
+					<!--</ComboBox>-->
+					
+					<Text text="{Oteil} - {Ottxt}" class="sapUiTinyMargin"/>
+				
+		
+					<Label text="{i18n>textFragmentLblCatCause}" class="sapUiTinyMargin"/>
+					<ComboBox id="cb_CatCause" items="{path : '/CAUSESet'}" selectedKey="{Urgrp}" editable="false" class="inputsAndCombos">
+						<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+					</ComboBox>
+				
+				
+					<Label text="{i18n>textFragmentLblCauseCode}" class="sapUiTinyMargin"/>
+					<!--<ComboBox id="cb_CauseCode" items="{path : '/CAUSECODESet'}" selectedKey="{Urcod}" editable="false" class="inputsAndCombos">-->
+					<!--	<core:Item key="{Urcod}" text="{Urcod} - {Kurztext}"/>-->
+					<!--</ComboBox>-->
+					<Text text="{Urcod} - {Kurztext}" class="sapUiTinyMargin"/>
+		
+					<Label id="failureCatLbl" text="{i18n>textLblCatFail}"/>
+					<ComboBox id="filtre_EchecCatalogue" items="{ path: '/WORKGROUPSet' }" selectedKey="{Fegrp}" editable="false" class="inputsAndCombos">
+						<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+					</ComboBox>
+					
+			
+					<Label id="failureCodeLbl" text="{i18n>textLblFailCode}" class="sapUiTinyMargin"/>
+					<!--<ComboBox id="filtre_codeEchec" items="{ path: '/WORKTYPESet' }" selectedKey="{Fecod}" class="inputsAndCombos" editable="false">-->
+					<!--	<core:Item key="{Fecod}" text="{Fecod} - {Kurztext}"/>-->
+					<!--</ComboBox>-->
+					<Text id="failureCodeTxt" text="{Fecod} - {Fetxt}" class="sapUiTinyMargin"/>
+					<!--<Text text="{TakPernr}" class="sapUiTinyMargin"/>-->
+					<!--<ComboBox items="{ path: '/OWNERSet' }" selectedKey="{TakPernr}" editable="false">-->
+					<!--	<core:Item key="{Pernr}" text="{Ename}"/>-->
+					<!--</ComboBox>-->
+				</f:content>
+			</f:SimpleForm>
+</core:FragmentDefinition>

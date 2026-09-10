@@ -1,0 +1,327 @@
+﻿<mvc:View controllerName="PO_MAINTENANCE.controller.Master" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:cust="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:l="sap.ui.layout"
+	xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:table="sap.ui.table" xmlns:smartTable="sap.ui.comp.smarttable" xmlns="sap.m">
+	<Page id="orderListPage" navButtonPress="onNavBack" showNavButton="true">
+		<!-- filtres de recherche -->
+		<FlexBox justifyContent="End">
+			<items>
+				<!--<HBox>-->
+				<!--	<Label text="Admin mode"/>-->
+				<!--	<Switch state="{userMode>/admin}"/>-->
+				<!--</HBox>-->
+				<Button enabled="{= ${userMode>/admin} &amp;&amp; ${userMode>/edit} }" press="onAssignedBtnPressed" icon="sap-icon://add-product" type="Emphasized" width="auto"
+					class="sapUiMediumMargin">
+					<layoutData>
+						<FlexItemData alignSelf="End"/>
+					</layoutData>
+				</Button>
+				<Button press="onPrintBtnPressed" icon="sap-icon://print" type="Emphasized" width="auto" class="sapUiMediumMargin">
+					<layoutData>
+						<FlexItemData alignSelf="End"/>
+					</layoutData>
+				</Button>
+				<!-- Bouton Go -->
+				<Button press="onGoPressed" text="{i18n>textBtnGO}" type="Emphasized" width="auto" class="sapUiMediumMargin">
+					<layoutData>
+						<FlexItemData alignSelf="End"/>
+					</layoutData>
+				</Button>
+				<Button press="onResetPressed" text="{i18n>textBtnReset}" type="Emphasized" width="auto" class="sapUiMediumMargin">
+					<layoutData>
+						<FlexItemData alignSelf="End"/>
+					</layoutData>
+				</Button>
+			</items>
+		</FlexBox>
+		<!-- 1Ã¨re ligne -->
+		<HBox class="sapUiSmallMarginTop" id="secondLine">
+			<!--Catalog function-->
+			<VBox class="sapUiMediumMarginBeginEnd" width="100%">
+				<Label text="{i18n>textFragmentLblCatFunc}"/>
+				<ComboBox id="cb_CatFunc" items="{path : '/FUNCTIONSet'}" selectionChange="onFunctionCatChange" width="100%" maxWidth="100%">
+					<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+				</ComboBox>
+			</VBox>
+			<!--Function code-->
+			<VBox class="sapUiMediumMarginBeginEnd" width="100%">
+				<Label text="{i18n>textFragmentLblFunCode}"/>
+				<ComboBox id="cb_FunCode" items="{path : '/FUNCTIONCODESet'}" enabled="false" width="100%" maxWidth="100%">
+					<core:Item key="{Code}" text="{Code} - {Kurztext}"/>
+				</ComboBox>
+			</VBox>
+		</HBox>
+		<HBox class="sapUiSmallMarginTop" id="fourthLine">
+			 <!--Catalog Failure -->
+			<VBox id="vBoxCatFailure" class="sapUiMediumMarginBeginEnd" width="100%">
+				<Label text="{i18n>textLblCatFail}"/>
+				<ComboBox id="filtre_EchecCatalogue" items="{ path: '/WORKGROUPSet' }" selectionChange="handleFailureCatChange" width="100%" maxWidth="100%">
+					<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+				</ComboBox>
+			</VBox>
+			<!-- Failure Code -->
+			<VBox id="vBoxFailureCode" class="sapUiMediumMarginBeginEnd" width="100%">
+				<Label text="{i18n>textLblFailCode}"/>
+				<ComboBox id="filtre_codeEchec" items="{ path: '/WORKTYPESet' }" enabled="false" width="100%" maxWidth="100%">
+					<core:Item key="{Code}" text="{Code} - {Kurztext}"/>
+				</ComboBox>
+			</VBox>
+		</HBox>
+		<HBox class="sapUiSmallMarginTop" id="thirdLine">
+			<!--Catalog Cause-->
+			<VBox class="sapUiMediumMarginBeginEnd" width="100%">
+				<!--<VBox class="sapUiSmallMarginEnd">-->
+				<!--<layoutData>-->
+				<!--	<l:GridData linebreakL="true" linebreakM="true" linebreakS="true" span="L6 M6 S12"/>-->
+				<!--</layoutData>-->
+				<Label text="{i18n>textFragmentLblCatCause}"/>
+				<ComboBox id="cb_CatCause" items="{path : '/CAUSESet'}" selectionChange="onCauseCatChange" width="100%" maxWidth="100%">
+					<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+				</ComboBox>
+			</VBox>
+			<!--Cause Code-->
+			<VBox class="sapUiMediumMarginBeginEnd" width="100%">
+				<Label text="{i18n>textFragmentLblCauseCode}"/>
+				<ComboBox id="cb_CauseCode" items="{path : '/CAUSECODESet'}" enabled="false" width="100%" maxWidth="100%">
+					<core:Item key="{Code}" text="{Code} - {Kurztext}"/>
+				</ComboBox>
+			</VBox>
+		</HBox>
+		<HBox class="sapUiSmallMarginTop" id="fifthLine">
+			<!-- Group -->
+			<VBox class="sapUiMediumMarginBeginEnd" id="vBoxWorkGroup" visible="false">
+				<Label text="{i18n>textLblWorktypeGrp}"/>
+				<ComboBox id="filtre_group" items="{ path: '/WORKGROUPSet' }" selectionChange="handleWorkGroupChange" class="inputsAndCombos" width="150%" maxWidth="150%">
+					<core:Item key="{Codegruppe}" text="{Codegruppe} - {Grouptext}"/>
+				</ComboBox>
+			</VBox>
+			<!-- Document date dÃ©but-->
+			<VBox class="sapUiMediumMarginBeginEnd UiDateDebPrev" id="vBoxDateDebCorr">
+				<Label text="{i18n>textLblDocumentdateDeb}"/>
+				<DatePicker displayFormat="short" editable="true" enabled="true" id="filtre_documentDateDeb"/>
+			</VBox>
+			<!-- Document date dÃ©but -->
+			<VBox class="sapUiMediumMarginBeginEnd UiDateDebPrev" id="vBoxDateDebPrev" visible="false">
+				<Label text="{i18n>textLblDocumentdateDeb}"/>
+				<DatePicker displayFormat="short" editable="true" enabled="true" id="filtre_documentDateDebPrev"/>
+			</VBox>
+			<!-- Document date fin -->
+			<VBox class="sapUiMediumMarginBeginEnd UiDateDebPrev">
+				<Label text="{i18n>textLblDocumentdateFin}"/>
+				<DatePicker displayFormat="short" editable="true" enabled="true" id="filtre_documentDateFin"/>
+			</VBox>
+		</HBox>
+		<!-- 3Ã¨me ligne -->
+		<HBox class="sapUiSmallMarginTop" id="sixLine">
+			<!-- PrioritÃ© -->
+			<VBox class="sapUiMediumMarginBeginEnd" id="vBoxPriority">
+				<Label text="{i18n>textLblPriority}"/>
+				<ComboBox id="filtre_priorite" items="{ path: '/PRIORITYSet'}" class="inputsAndCombos">
+					<core:Item key="{Prior}" text="{Prior} {Description}"/>
+				</ComboBox>
+			</VBox>
+			<!--Work Center-->
+			<VBox class="sapUiMediumMarginBeginEnd" id="vBoxWorkCenter">
+				<Label text="{i18n>textLblWorkCenter}"/>
+				<ComboBox id="filtre_wCenter" items="{ path: '/WORKCENTERSet' }" selectionChange="handleWorkCenterChange" class="inputsAndCombos">
+					<core:Item key="{Arbpl}" text="{Arbpl}"/>
+				</ComboBox>
+			</VBox>
+			<!-- Intervenant -->
+			<VBox class="sapUiMediumMarginBeginEnd">
+				<Label class="" text="{i18n>responsible}"/>
+				<ComboBox id="filtre_intervenant" items="{ path: '/OWNERSet' }" enabled="true" class="inputsAndCombos"> 
+					<core:Item key="{Pernr}" text="{Ename}"/>
+				</ComboBox>
+			</VBox>
+			<!-- Emetteur -->
+			<VBox class="sapUiMediumMarginBeginEnd">
+				<Label class="" text="{i18n>textLblEmetteur}"/>
+				<!--<ComboBox id="filtre_emeteur" items="{ path: '/REQUESTERSet' }" enabled="false" width="100%">-->
+				<!--	<core:Item key="{Pernr}" text="{Ename}"/>-->
+				<!--</ComboBox>-->
+				<Input id="filtre_emeteur" class="inputsAndCombos" width="100%" />
+			</VBox>
+			<!-- Type d'activitÃ© -->
+			<!--<VBox class="sapUiMediumMarginBeginEnd">-->
+			<!--	<Label text="{i18n>textLblTypeActivite}"/>-->
+			<!--	<ComboBox id="filtre_typeActivite" items="{ path: '/ACTTYPESet' }" class="inputsAndCombos">-->
+			<!--		<core:Item key="{ActType}" text="{ActDesc}"/>-->
+			<!--	</ComboBox>-->
+			<!--</VBox>-->
+			<!-- Catalog function -->
+			<!--<VBox class="sapUiMediumMarginBeginEnd" id="vBoxCatFunction">-->
+			<!--	<Label text="{i18n>textLblCatFun}"/>-->
+			<!--	<ComboBox id="filtre_FonctionCatalogue" items="" class="inputsAndCombos">-->
+			<!--		<core:Item key="" text=""/>-->
+			<!--	</ComboBox>-->
+			<!--</VBox>-->
+		</HBox>
+		<!-- 4Ã¨me ligne -->
+		<HBox class="sapUiSmallMarginTop"  id="sevenLine">
+			<!-- Poste Technique -->
+			<VBox class="sapUiMediumMarginBeginEnd">
+				<Label text="{i18n>textLblPosteTechnique}"/>
+				<HBox>
+					<Input id="filtre_posteTechnique" showValueHelp="true" valueHelpRequest="onPosteTechniqueValueHelpRequest" class="inputsAndCombos"/>
+				</HBox>
+			</VBox>
+			<!-- Equipement -->
+			<VBox class="sapUiMediumMarginBeginEnd">
+				<Label text="{i18n>textLblEquipement}"/>
+				<HBox>
+					<Input id="filtre_equipement" showValueHelp="true" valueHelpRequest="onEquipementValueHelpRequest" class="inputsAndCombos"/>
+					<Button id="btn_scan" text="Scan" press="onScanCreate" icon="sap-icon://bar-code" enabled="true" class="sapUiTinyMarginBegin"/>
+				</HBox>
+			</VBox>
+			<!-- Materiel de rechange -->
+			<!--<VBox class="sapUiMediumMarginBeginEnd">-->
+			<!--	<Label class="" text="{i18n>textLblRechange}"/>-->
+			<!--	<Input id="filtre_rechange" showValueHelp="true" valueHelpRequest="onArticleValueHelpRequest" class="inputsAndCombos"/>-->
+			<!--</VBox>-->
+			<!-- Assigned -->
+			<!--<VBox class="sapUiMediumMarginBeginEnd" id="vBoxAssigned">-->
+			<!--	<Label class="" text="{i18n>textLblAssigned}"/>-->
+			<!--	<ComboBox id="filtre_assigned" width="100%">-->
+			<!--		<core:Item key="A" text="Assigned"/>-->
+			<!--		<core:Item key="N" text="Not assigned"/>-->
+			<!--		<core:Item key="" text=""/>-->
+			<!--	</ComboBox>-->
+			<!--</VBox>-->
+		</HBox>
+		<!-- Tableau des rÃ©sultats de recherche -->
+		<Table class="navTableControlLayout" mode="MultiSelect" growing="false" growingScrollToLoad="false" headerText="" id="catalogTable"
+			items="{/ORDERLISTSet}">
+			<headerToolbar id="catalogTable_headerToolbar">
+				<Toolbar id="tableToolbar">
+					<Label class="sapMH4FontSize" id="catalogTitle" text="{viewProperties&gt;/catalogTitleText}"
+						visible="{viewProperties&gt;/catalogTitleVisible}"/>
+					<ToolbarSpacer id="toolbarSpacer"/>
+					<CheckBox text="History" id="historyChkBx" visible="false" class="headerTableHistory"/>
+					<SearchField id="searchField" placeholder="{i18n&gt;masterSearchPlaceholder}" search="onSearchPressed" showRefreshButton="false"
+						tooltip="{i18n&gt;masterSearchTooltip}" width="{viewProperties&gt;/searchFieldWidth}"/>
+					<Button
+							tooltip="Sort Sort Settings"
+							icon="sap-icon://sort"
+							press="handleSortButtonPressed"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns id="catalogTable_columns">
+				<Column hAlign="Left" id="col_ordernumber" width="10%">
+					<header id="col_ordernumber_header">
+						<Label id="col_ordernumber_label" text="{i18n>colNoOrdre}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_orderdesc" width="{viewProperties&gt;/largeWidth}">
+					<header id="col_orderdesc_header">
+						<Label id="col_orderdesc_label" text="{i18n>colDescription}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_postetechnique" width="20%">
+					<header id="col_postetechnique_header">
+						<Label id="col_postetechnique_label" text="{i18n>colPostetechnique}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_equipement" width="{viewProperties&gt;/normalWidth}">
+					<header id="col_equipement_header">
+						<Label id="col_equipement_label" text="{i18n>colEquipement}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_emmetteur" width="8%">
+					<header id="col_emmetteur_header">
+						<Label id="col_emmetteur_label" text="{i18n>colEmetteur}"/>
+					</header>
+				</Column>
+				<!--<Column hAlign="Left" id="col_typetravaux" width="8%">-->
+				<!--	<header id="col_typetravaux_header">-->
+				<!--		<Label id="col_typetravaux_label" text="{i18n>colTypetravaux}"/>-->
+				<!--	</header>-->
+				<!--</Column>-->
+				<Column hAlign="Left" id="col_priorite" width="5%">
+					<header id="col_priorite_header">
+						<Label id="col_priorite_label" text="{i18n>colPriority}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_date" width="15%">
+					<header id="col_date_header">
+						<Label id="col_date_label" text="{i18n>colDate}"/>
+							<!--<Button-->
+							<!--tooltip="Sort"-->
+							<!--text="{i18n>colDate}"-->
+							<!--icon="sap-icon://sort"-->
+							<!--press="handleSortButtonPressed"/>-->
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_temps" width="10%" visible="false">
+					<header id="col_temps_header">
+						<Label id="col_temps_label" text="{i18n>colTemps}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_workSche" width="{viewProperties&gt;/smallWidth}">
+					<header id="col_workSche_header">
+						<Label id="col_workSche_label" text="{i18n>colTempsPrevu}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_technician" width="8%">
+					<header id="col_technician_header">
+						<Label id="col_technician_label" text="{i18n>responsible}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" id="col_instruction" width="8%" visible="false">
+					<header id="col_instruction_header">
+						<Label id="col_instruction_label" text="{i18n>colInstruction}"/>
+					</header>
+				</Column>
+				<Column hAlign="Left" width="3%">
+					<header>
+						<Label text=""/>
+					</header>
+				</Column>
+				<Column hAlign="Left" width="3%">
+					<header>
+						<Label text=""/>
+					</header>
+				</Column>
+			    <!--JII 4410 RAGOW Addition of workcenter-->
+				<Column hAlign="Left" id="col_WorkCenter" width="10%">
+					<header>
+						<Label	id="idWorkCenter_LBL" text="{i18n>colWorkCenter}"/>
+					</header>
+				</Column>
+				<!--	<Column hAlign="Left" id="col_Instruction" width="10%">-->
+				<!--	<header>-->
+				<!--		<Label	id="idInstruction_LBL" text="Instruction"/>-->
+				<!--	</header>-->
+				<!--</Column>-->
+			</columns>
+		
+			<ColumnListItem class="navTableItemLayout" id="columnListItem" press="onLineItemPressed" type="Navigation" vAlign="Middle">
+				<cells id="columnListItem_cells">
+					<!-- colonnes -->
+					<ObjectIdentifier text="" title="{Aufnr}"/>
+					<Text id="col_description" text="{Ktext}"/>
+					<Text id="col_posteTechniqueVal" text="{Tplnrtxt}"/>
+					<Text id="col_equipementVal" text="{Equnrtxt}"/>
+					<Text id="col_emmetteurVal" text="{Qmnam}"/>
+					<!--<Text id="col_typeTravauxVal" text="{Kurztext}"/>-->
+					<Text id="col_prioriteVal" text="{Priok}"/>
+					<DatePicker dateValue="{path: 'Date', formatter:'.formatDate'}" displayFormat="short" editable="false" enabled="true" id="col_dateVal"/>
+						<!--<Text text="{-->
+						<!--		path: 'Date',-->
+						<!--		type: 'sap.ui.model.type.Date',-->
+						<!--		formatOptions: {source: {pattern: 'dd/MM/yyyy'}, style: 'long'}-->
+						<!--	}" wrapping="false" />-->
+					<Text id="col_tempsVal" text="" visible="false"/>
+					<Text id="col_tempsPrevu" text="{WorkSche}{UnWork}"/>
+					<Text id="col_technicianVal" text="{TakName}"/>
+					<Text id="col_instructionVal" text="" visible="false"/>
+					<core:Icon src="{= ( ${TakName} ) ? 'sap-icon://employee' : '' }"/>
+					<core:Icon src="{= ( ${PrintStatus} !== '' ) ? 'sap-icon://print' : ''}"
+						color="{= ( ${PrintStatus} === 'P' ) ? 'green' : ( ${PrintStatus} === 'R' ) ? 'orange' : '' }"/>
+					<Text id="idWorkCenter_TXT" text="{Gewrk}"/>
+				</cells>
+			</ColumnListItem>
+		</Table>
+		<footer/>
+	</Page>
+</mvc:View>

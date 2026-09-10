@@ -1,0 +1,153 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout"
+	xmlns:cust="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns="sap.m">
+	<l:VerticalLayout class="sapUiResponsivePadding">
+		<Table id="tableItems" noDataText="{i18n>textFragmentTableNoPoste}" items="{path: 'orderitem>/ORDERITEMSSet'}"
+			updateFinished="onItemsLoaded">
+			<!--items="{path: 'orderitem>/ORDERITEMSSet', parameters: { expand: 'TOCOMMENTS' }}" updateFinished="onItemsLoaded">-->
+			<!--items="{path: 'orderitem>/ORDERITEMSSet'}" updateFinished="onItemsLoaded">-->
+			<headerToolbar>
+				<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button press="onAddEditItem" text="{i18n>textBtnAddOperation}" type="Transparent"/>
+				</OverflowToolbar>
+			</headerToolbar>
+			<columns>
+				<Column id="colPosteNo" width="5rem">
+					<header>
+						<Label id="lblPosteNo" text="{i18n>textFragmentLblPostNumber}"/>
+					</header>
+				</Column>
+				<Column id="colPartielle" width="5rem">
+					<header>
+						<Label id="lblPartielle" text="{i18n>textFragmentLblPartielle}"/>
+					</header>
+				</Column>
+				<Column id="colDefinitive" width="5rem">
+					<header>
+						<Label id="lblDefinitive" text="{i18n>textFragmentLblDefinitive}"/>
+					</header>
+				</Column>
+				<Column id="colPosteIntervenant">
+					<header>
+						<Label id="lblPosteIntervenant" text="{i18n>textFragmentLblIntervenant}"/>
+					</header>
+				</Column>
+				<Column id="colPosteIntervenantId" visible="false">
+					<header>
+						<Label id="lblPosteIntervenantId" text="{i18n>textFragmentLblIntervenantId}"/>
+					</header>
+				</Column>
+				<Column id="colPosteDescription" width="16rem">
+					<header>
+						<Label id="lblPosteDescription" text="{i18n>textFragmentLblDescription}"/>
+					</header>
+				</Column>
+				<Column id="colCommentaire" width="10rem">
+					<header>
+						<Label id="lblCommentaire" text="{i18n>textFragmentLblCommentaire}"/>
+					</header>
+				</Column>
+				<Column id="colCentreTravail">
+					<header>
+						<Label id="lblCentreTravail" text="{i18n>textFragmentLblCentreTravail}" wrapping="true"/>
+					</header>
+				</Column>
+				<!--	<Column id="colDefaillance">
+					<header>
+						<Label id="lblDefaillance" text="{i18n>textFragmentLblDefaillance}"/>
+					
+					</header>
+				</Column>
+				<Column id="colFonction">
+					<header>
+						<Label id="lblFonction" text="{i18n>textFragmentLblFonction}"/>
+						
+					</header>
+				</Column>
+				<Column id="colCause">
+					<header>
+						<Label id="lblCause" text="{i18n>textFragmentLblCause}"/>
+					
+					</header>
+				</Column>-->
+				<Column id="colDate" width="6rem">
+					<header>
+						<Label id="lblDate" text="{i18n>textFragmentLblDate}"/>
+					</header>
+				</Column>
+				<Column id="colTemps" width="5rem">
+					<header>
+						<Label id="lblTemps" text="{i18n>textFragmentLblTemps}"/>
+						<!--<Label id="lblTemps" text="Time"/>-->
+					</header>
+				</Column>
+				<Column id="colDejaConfirmer">
+					<header>
+						<Label id="lblDejaConfirmer" text="{i18n>textFragmentLblConfirmed}" wrapping="true"/>
+					</header>
+				</Column>
+				<Column id="col1" visible="{= ${Disp_status} === 'X'}">
+					<header>
+						<Label id="lblCol1" text="{i18n>textFragmentLblCol1}"/>
+					</header>
+				</Column>
+				<Column id="col2" visible="{= ${Disp_status} === 'X'}">
+					<header>
+						<Label id="lblCol2" text="{i18n>textFragmentLblCol2}"/>
+					</header>
+				</Column>
+				<Column id="col3" visible="{= ${Disp_status} === 'X'}">
+					<header>
+						<Label id="lblCol3" text="{i18n>textFragmentLblCol3}"/>
+					</header>
+				</Column>
+				<Column id="col4" visible="{= ${Disp_status} === 'X'}">
+					<header>
+						<Label id="lblCol4" text="{i18n>textFragmentLblCol4}"/>
+					</header>
+				</Column>
+				<Column id="col5" visible="{= ${Disp_status} === 'X'}">
+					<header>
+						<Label id="lblCol5" text="{i18n>textFragmentLblCol5}"/>
+					</header>
+				</Column>
+				<Column />
+			</columns>
+			<items>
+				<ColumnListItem id="itemsTemplate" cust:definitive="{orderitem>Finconf}" press="onItemSelect">
+					<cells>
+						<Text id="txtPosteNo" text="{parts: [{path: 'orderitem>Vornr'},{path: 'orderitem>Uvorn'}], formatter : '.formatItem'}"/>
+						<RadioButton id="cbPartielle" groupName="{orderitem>Uvorn}{orderitem>Vornr}Options" editable="true" width="10%"
+							select="onConfirmationSelection"/>
+						<RadioButton id="cbDefinitive" groupName="{orderitem>Uvorn}{orderitem>Vornr}Options" width="10%" select="onConfirmationSelection"/>
+						<!--selected="{parts: [{path: 'orderitem>Vornr'}, {path: 'orderitem>Uvorn'}, {path: 'orderitem>Aufnr'}, {path: 'orderitem>Finconf'}], formatter: '.selectConfirmationBtn'}"/> -->
+						<!--<RadioButton id="cbPartielle" groupName="{Vornr}Options" selected="{path: 'Parconf'}"-->
+						<!--	 editable="true" width="10%"/>-->
+						<!--<RadioButton id="cbDefinitive" groupName="{Vornr}Options" selected="{path: 'Finconf'}"-->
+						<!--	 editable="true" width="10%"/>-->
+						<Text id="txtPosteIntervenant" text="{parts: [{path: 'orderitem>Pernr'}], formatter: '.formatIntervenantName'}"/>
+						<Text id="txtPosteIntervenantId" text="{orderitem>Pernr}" visible="false"/>
+						<Text id="txtPosteDescription" text="{orderitem>Description}"/>
+						<!--<Input id="txtCommentaire1" value="{parts: [{path:'orderitem>Comments'}, {path:'orderitem>Conftime'} ], formatter: '.onFormatItemComments'}" wrapping="false" maxLines="3" enabled="false"/>-->
+						<Text id="txtCommentaire" class="textWithBorder"
+							text="{parts: [{path:'orderitem>Comments'}, {path:'orderitem>Conftime'} ], formatter: '.onFormatItemComments'}" wrapping="false"
+							maxLines="3"/>
+						<Text id="txtCentreTravail" text="{orderitem>Gewrk}"/>
+						<!--	<Text id="txtDefaillance" text="{orderitem>Fetxt}"/>
+						<Text id="txtFonction" text="{orderitem>Ottxt}"/>
+						<Text id="txtCause" text="{orderitem>Urtxt}"/>-->
+						<Text id="txtDate" text="{path: 'orderitem>Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' }}"/>
+						<Text id="txtTemps" text="{path: 'orderitem>Time', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern: 'HH:mm:ss' }}"/>
+						<Text id="txtDejaConfirmer" text="{orderitem>Conftime} Min"/>
+						<RadioButton id="cbStatus1" groupName="{orderitem>Vornr}Status" visible="{= ${Disp_status} === 'X'}"/>
+						<RadioButton id="cbStatus2" groupName="{orderitem>Vornr}Status" visible="{= ${Disp_status} === 'X'}"/>
+						<RadioButton id="cbStatus3" groupName="{orderitem>Vornr}Status" visible="{= ${Disp_status} === 'X'}"/>
+						<RadioButton id="cbStatus4" groupName="{orderitem>Vornr}Status" visible="{= ${Disp_status} === 'X'}"/>
+						<RadioButton id="cbStatus5" groupName="{orderitem>Vornr}Status" visible="{= ${Disp_status} === 'X'}"/>
+						<Button icon="sap-icon://delete" press="onActivityDelete"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

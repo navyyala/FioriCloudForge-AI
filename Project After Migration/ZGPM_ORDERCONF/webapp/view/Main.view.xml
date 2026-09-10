@@ -1,0 +1,3 @@
+<mvc:View controllerName="PO_MAINTENANCE.controller.Main" displayBlock="true" height="100%" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<App id="fioriContent"></App>
+</mvc:View>

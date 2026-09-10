@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified">
+	<Dialog title="{i18n>addAttachment}">
+		<content>
+		<u:FileUploader id="fileUploader" name="myFileUpload" uploadUrl="/sap/opu/odata/sap/ZGPM_CONFIRM_ORDER_SRV/ATTACHSet" tooltip="Upload your file"
+			uploadComplete="handleAttachUploadComplete" change="onFileChange" sendXHR="true" useMultipart="false" class="sapUiMediumMarginBegin"/>
+		</content>
+		<endButton>
+			<Button text="{i18n>Close}" press="onUploaderClose"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

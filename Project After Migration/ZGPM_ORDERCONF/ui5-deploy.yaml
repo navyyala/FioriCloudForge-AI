@@ -1,0 +1,28 @@
+specVersion: "3.2"
+metadata:
+  name: zgpm-orderconf
+type: application
+framework:
+  name: SAPUI5
+  version: "1.71.84"
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.ui.layout
+    - name: sap.ndc
+    - name: themelib_sap_belize
+      optional: true
+builder:
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://sdctwd0024.ad.ponet:8000
+          client: "100"
+        app:
+          name: ZGPM_ORDERCONF
+          package: ZGPM_PM
+          transport: ""
+        exclude:
+          - /test/

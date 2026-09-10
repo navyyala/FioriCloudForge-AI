@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog close="handleEquipmentHelpDialogClose" confirm="handleEquipmentHelpDialogClose" id="equipmenthelpid" noDataText="{i18n>textFragmentNoEquipement}"
+		items="{path:'equipmentmodel>/'}" title="{i18n>textFragmentTitleEquipement}" search="handleEquipmentHelpDialogSearch">
+		<StandardListItem description="{equipmentmodel>Equnr}" info="{equipmentmodel>Tplnr}" title="{equipmentmodel>Eqktu}" type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

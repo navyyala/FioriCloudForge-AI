@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:ui="sap.suite.ui.commons"
+	xmlns="sap.m">
+	<Dialog id="confirmDialog" title="{i18n>textLblStopTimeValidation}" resizable="true">
+		<content>
+			<form:SimpleForm editable="true" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" columnsL="1" columnsM="1"
+				layout="ResponsiveGridLayout">
+				<form:content>
+					<Label text="{i18n>textLblStopTime}"/>
+					<Input value="{confirmed>/breakdownTime}" type="Number" width="60%"/>
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<Toolbar class="searchTb">
+			<ToolbarSpacer/>
+			<Button press="checkBeforeSave" text="{i18n>textBtnValidate}" class="searchBtn"/>
+			<Button press="closeDialog" text="{i18n>textBtnCancel}" class="searchBtn"/>
+		</Toolbar>
+	</Dialog>
+</core:FragmentDefinition>

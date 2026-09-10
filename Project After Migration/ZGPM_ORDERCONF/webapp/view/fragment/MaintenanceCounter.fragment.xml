@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Table id="filterMaintCounter" items="{/MaintCountersSet}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="{i18n>textIconTabMaintenanceCounter}" level="H2"/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>textMeasuringpoint}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textDescription}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textActualValue}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textUnit}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textNewValue}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textComment}"/>
+			</Column>
+		</columns>
+			<items>
+			<ColumnListItem>
+				<Text text="{Point}"/>
+				<Text text="{Pttxt}"/>
+				<!--<Text text="{Cntrr}"/>-->
+				<Text id="id_Cntrc_actual" text="{parts: ['Cntrr', 'Recdu'] , formatter:'.maintActualValue'}"/>
+				<Text id="id_Recdu" text="{Recdu}"/>
+				<Input id="id_Cntrc" value="{Cntrc}"/>
+				<Input id="id_Mdtxt" value="{Mdtxt}" />
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

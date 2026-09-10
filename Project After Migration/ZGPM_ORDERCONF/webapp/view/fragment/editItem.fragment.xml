@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:ui="sap.suite.ui.commons" xmlns:form="sap.ui.layout.form" xmlns="sap.m">
+	<Dialog id="addEditItemDialog" title="{i18n>textFragmentUpdateOperation}" contentHeight="70%" contentWidth= "70%">
+		<content>
+			<l:Grid defaultSpan="L12 M7 S12" width="auto">
+		<l:content>
+			<form:SimpleForm id="itemForm" layout="ResponsiveGridLayout" maxContainerCols="2">
+				<form:content>
+					<Label text="{i18n>textLblDescription}"/>
+					<TextArea id="itemDescription" rows= "3" width="80%"/>
+					<Label class="" text="{i18n>textFragmentLblIntervenant}" />
+					<ComboBox id="cb_intervenant" items="{/OWNERSet}" editable="false" enabled = "false" width="80%" >
+						<core:Item key="{Pernr}" text="{Ename}"/>
+					</ComboBox>
+					<Label text="{i18n>textFragmentLblCommentaire}"/>
+					<TextArea id="itemCommentaire" rows= "3" width="80%"/>
+				</form:content>
+			</form:SimpleForm>
+			</l:content>
+			</l:Grid>
+			<!--<core:Fragment fragmentName="PO_MAINTENANCE.view.fragment.addComments" type="XML" />-->
+			<Panel expandable="true" expanded="true" headerText="{i18n>commentsTitle}">
+			<VBox id="itemComments">
+				<!--<FeedInput post="onPostComments" icon="sap-icon://employee" class="sapUiSmallMarginTopBottom"/>-->
+				<List id="itemCommentsTable" showSeparators="Inner" items="{TOCOMMENTS}" updateFinished="onCommentsUpdateFinished">
+					<FeedListItem sender="{PernrDis}" iconDensityAware="false"
+						 timestamp="{parts: [{path:'YDate'}, {path:'Time'}], formatter: '.convertDate'}" text="{CommentsDis}"  
+						info="{parts: [{path:'ConfFlg'}, {path:'RecHrs'}], formatter: '.finalhours'}"/>
+				</List>
+			</VBox>
+			</Panel>
+			
+		</content>
+		<beginButton>
+			<Button press="saveItem" text="{i18n>textBtnSave}"/>
+		</beginButton>
+		<endButton>
+			<Button press="closeDialog" text="{i18n>textBtnCancel}"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,65 @@
+<!-- <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"> <SelectDialog 
+	close="handleFunctionalDialogClose" confirm="handleFunctionalDialogClose" 
+	id="functionalhelpid" items="{path:'/FUNCTIONAL_LOCATION_F4Set'}" title="{i18n>fragmenttitlePoste}" 
+	search="handleFunctionalDialogSearch"> <StandardListItem description="{Tplnr}" 
+	title="{Pltxt}" type="Active"/> </SelectDialog> </core:FragmentDefinition> -->
+	
+<!-- Start JII-3786 -->
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:cust="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog contentHeight="100%" contentWidth="30%"
+		title="{i18n>fragmenttitlePoste}">
+		<Bar id="searchBar">
+			<contentLeft>
+				<!--<Button icon="sap-icon://home" id="btn_home" press="onHome"/> -->
+				<Button icon="sap-icon://refresh" id="btn_refresh" press="onRefreshList" />
+			</contentLeft>
+			<contentMiddle>
+				<SearchField id="searchField" placeholder="{i18n>searchText}"
+					search="onSearch" tooltip="{i18n&gt;masterSearchTooltip}" width="100%" />
+			</contentMiddle>
+		</Bar>
+		<content>
+			<!--Navigation path list -->
+			<List class="listlevel" id="listNav" items="{path: '/FUNCPARENTSet'}"
+			updateFinished = "tableDataReceived"
+				mode="SingleSelectMaster" showNoData="false" select="onSelectFuncHelpParent">
+				<items>
+					<CustomListItem class="listlevel" counter="0" cust:name="{Name}"
+						cust:level="{Level}" cust:base64="{Base64}" id="navListItem" 
+						markFavorite="false">
+					<!--	<Title class="nodeList" text="{Description}" />-->
+						<Link class="nodeList1"  text="{Description}" press="onSelect" />
+					</CustomListItem>
+				</items>
+			</List>
+			<!--Navigation main list -->
+			<List id="list" class="listlevel" mode="SingleSelect" items="{path: '/FUNCLEVELSet'}"
+				showNoData="false">
+				<items>
+					<CustomListItem class="listlevel" counter="0" cust:lowerLevel="{LowerLevel}"
+						cust:objType="{ObjType}" cust:color="{Color}" id="mainListItem"
+						cust:base64="{Base64}" enabled="{= ${ObjType === 'F'}}">
+						
+					<!--	<RadioButton id="radiohelp" select="onSelectItem"></RadioButton>--> 
+						
+						<Link class="nodeList"   text="{Description}" press="onSelect" enabled="{= ${LowerLevel} === 'X'}"> 
+						<customData>
+						<core:CustomData key="cssSap" value="{LowerLevel}" writeToDom="true"></core:CustomData>
+						</customData> 
+						</Link>
+					</CustomListItem>
+				</items>
+			</List>
+		</content>
+		<beginButton>
+			<Button text="OK" press="onConfirmHierarchy" /> 		
+			</beginButton>
+		<endButton>
+			<Button text="Cancel" press="handleFuncHelpDialogClose" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
+
+<!--End JII-3786 -->

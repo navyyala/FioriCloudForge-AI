@@ -1,0 +1,73 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:ui="sap.suite.ui.commons"
+	xmlns="sap.m">
+	<Dialog id="addArticleDialog" title="{i18n>fragmentAddArticleTitle}" resizable="true">
+		<content>
+			<form:SimpleForm editable="true" id="articleForm" maxContainerCols="3">
+				<form:content>
+					<!--Material-->
+					<Label text="{i18n>textFragmentLblArticleCode}"/>
+					<!--<Input id="inputArticle" showValueHelp="true" valueHelpRequest="onScanArticle" change="onSearchArticle" width="60%"/>-->
+					<HBox class="barcodeInputWrapper">
+						<Input id="inputArticle" width="120%"/>
+						<Button icon="sap-icon://bar-code" press=".stockOutputHelper.onScanArticleCode" type="Transparent" class="barcodeButton"/>
+					</HBox>
+					<Text id="articleDesc"/>
+					<!--Storage location-->
+					<Label text="{i18n>textFragmentLblStorageLocation}"/>
+					<Input id="inputStoreLocation" valueHelpOnly="false" showValueHelp="true" valueHelpRequest="searchArticle"/>
+					<Text id="storageLocationDesc"/>
+					<!-- Start JII-7074 added condition field besides quantity -->
+					<!--<HBox width="100%" justifyContent="SpaceAround" alignItems="Start">-->
+						<!-- Quantity Column -->
+						<!--<VBox >-->
+							<Label id="qtyLbl" text="{i18n>textFragmentLblQuantity}"/>
+							<Input id="inputQty" type="Number" valueLiveUpdate="true" liveChange=".stockOutputHelper.onLiveChangeQuantity"/>
+							<Text id="qtyUnit"/>
+						<!--</VBox>-->
+						<!-- Condition Column -->
+						<!--<VBox class="sapUiSmallMarinBegin">-->
+							<Label id="conditionLbl" text="{i18n>textFragmentLblCondition}"/>
+							<Input id="inputCondition" showValueHelp="true" valueHelpRequest=".stockOutputHelper.onConditionVH" valueHelpOnly="true"/>
+							<Text id="conditionDesc"/>
+						<!--</VBox>-->
+					<!--</HBox>-->
+					<!-- End JII-7074 -->
+					<!--Quantity-->
+					<!--<Label id="qtyLbl" text="{i18n>textFragmentLblQuantity}"/>-->
+					<!--<Input id="inputQty" type="Number" width="60%"/>-->
+					<!--<Text id="qtyUnit"/>-->
+					<!--Date-->
+					<Label id="dateLbl" text="{i18n>textFragmentLblDate}"/>
+					<DatePicker id="inputDate" width="60%" dateValue="{stock>/date}"
+						value="{path:'stock>/date', type:'sap.ui.model.type.Date', formatOptions: { style: 'short', strictParsing: true}}" displayFormat="short"/>
+					<!--Serial number-->
+					<!--	<Label text="{i18n>textFragmentLblSerialNumber}"/>
+					<Input id="inputSerialNum" enabled="false" showValueHelp="true" valueHelpRequest="onScanSerialNum" change="onSearchSerialNumber" width="60%"/>
+					<ComboBox id="cbSerialNum" forceSelection="false" enabled="false" width="60%" items="{serialNumber>/results}">
+						<core:Item key="{serialNumber>Sernr}" text="{serialNumber>Sernr}"></core:Item>
+					</ComboBox>-->
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<Toolbar class="searchTb">
+				<ToolbarSpacer/>
+				<Button press="searchArticle" text="{i18n>textBtnSearch}" class="searchBtn"/>
+				<!-- Start JII-7074 added stock return btn -->
+				<Button id="stockReturnBtn" press=".stockOutputHelper.onStockReturn" text="{i18n>textBtnStockReturn}" class="searchBtn">
+					<customData>
+						<core:CustomData key="Returns" value="X"/>
+					</customData>
+				</Button>
+				<!-- End JII-7074 -->
+				<Button id="stockOutputBtn" press="saveArticle" text="{i18n>textBtnStock}" class="searchBtn">
+					<customData>
+						<core:CustomData key="Returns" value=""/>
+					</customData>
+				</Button>
+				<!--JII 4410 RAGOW-->
+				<!--<Button press="closeDialog" text="{i18n>textBtnCancel}" class="searchBtn"/>-->
+				<Button press="closeDialog" text="{i18n>textBtnClose}" class="searchBtn"/>
+				<ToolbarSpacer/>
+		</Toolbar>
+	</Dialog>
+</core:FragmentDefinition>

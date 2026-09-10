@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:ui="sap.suite.ui.commons" xmlns="sap.m">
+	<Dialog id="takeOverDialog" title="{i18n>fragmentTakeOverTitle}" resizable="true">
+		<content>
+			<form:SimpleForm editable="true" maxContainerCols="3">
+				<form:content>
+					<Label text="{i18n>textFragmentLblTechnician}"/>
+					<ComboBox id="filtre_intervenant" items="{ path: '/OWNERSet' }" change="onTechTakeOverChange" selectedKey="{takeOver>/technician}" enabled="{takeOver>/enabled}" class="inputsAndCombos">
+						<core:Item key="{Pernr}" text="{Ename}"/>
+					</ComboBox>
+					<Label id="dateLbl" text="{i18n>textFragmentLblDatePriseEnCharge}"/>
+					<DateTimeInput type="DateTime" width="60%" dateValue="{takeOver>/date}" enabled="{takeOver>/enabled}" value="{path:'takeOver>/date', type:'sap.ui.model.type.DateTime', formatOptions: { style: 'short' }}" />
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<Toolbar class="searchTb">
+			<ToolbarSpacer/>
+			<Button press="takeOverOrder" text="{i18n>textBtnValidate}" type="Accept" visible="{takeOver>/enabled}"/>
+			<Button press="closeDialog" text="{i18n>textBtnCancel}" type="Reject"/>
+		</Toolbar>
+	</Dialog>
+</core:FragmentDefinition>

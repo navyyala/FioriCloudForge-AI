@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:ui="sap.suite.ui.commons" xmlns="sap.m">
+	<Dialog id="assignDialog" title="{i18n>fragmentAssignTitle}" resizable="true">
+		<content>
+			<form:SimpleForm editable="true" maxContainerCols="3">
+				<form:content>
+					<Label id="dateLbl" text="{i18n>textFragmentLblAssignment}"/>
+					<VBox class="sapUiSmallMargin">
+						<RadioButton groupName="A" text="Not Assigned" selected="{assignment>/notAssigned}"/>
+						<RadioButton groupName="A" text="Assigned" selected="{assignment>/assigned}" />
+					</VBox>
+					<Label text="{i18n>textFragmentLblTechnician}"/>
+					<ComboBox id="filtre_intervenant" items="{ path: '/OWNERSet' }" selectedKey="{assignment>/technician}" enabled="{assignment>/assigned}" class="inputsAndCombos">
+						<core:Item key="{Pernr}" text="{Ename}"/>
+					</ComboBox>
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<Toolbar class="searchTb">
+			<ToolbarSpacer/>
+			<Button press="executeAssignment" text="{i18n>textBtnValidate}" type="Accept" />
+			<Button press="closeDialog" text="{i18n>textBtnCancel}" type="Reject"/>
+		</Toolbar>
+	</Dialog>
+</core:FragmentDefinition>

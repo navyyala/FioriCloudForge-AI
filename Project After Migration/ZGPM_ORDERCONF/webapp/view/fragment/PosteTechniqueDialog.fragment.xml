@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog close="handlePosteTechniqueDialogClose" confirm="handlePosteTechniqueDialogClose" id="sdPoste"
+		items="{path:'/FUNCLOCEQUISet'}" title="{i18n>fragmenttitlePoste}" search="handlePosteTechniqueDialogSearch">
+		<StandardListItem description="{Tplnr}" title="{Description}" type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

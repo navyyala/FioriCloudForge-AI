@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog close=".stockOutputHelper.handleConditionClose" confirm=".stockOutputHelper.handleConditionClose" id="condition"
+		items="{path:'orderitem>/condition_helpSet'}" title="{i18n>textFragmentLblCondition}" search="onConditionSearch">
+		<StandardListItem description="{orderitem>Bwtar}" title="{orderitem>Bwtar}" type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

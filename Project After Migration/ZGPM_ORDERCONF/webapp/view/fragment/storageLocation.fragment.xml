@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog close="handleStorageLocationClose" confirm="handleStorageLocationClose" id="storageLocDlg"
+		items="{path:'orderitem>/STORAGE_LOCSet'}" title="{i18n>fragmenttitleStorageLoc}" search="onStorageLocationSearch">
+		<StandardListItem description="{orderitem>Lgort}" title="{orderitem>Lgobe}" type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

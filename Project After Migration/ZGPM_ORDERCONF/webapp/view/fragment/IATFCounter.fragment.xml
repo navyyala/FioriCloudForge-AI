@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Table id="filterIATFCounter" items="{/IATFCountersSet}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="{i18n>textIconTabIATFCounter}" level="H2"/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>textMeasuringpoint}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textDescription}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textTargetvalue}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textLoMRLimit}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textUpMRLimit}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textReadValue}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>textComment}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<Text text="{Point}"/>
+				<Text text="{Pttxt}"/>
+				<Text text="{Desir}"/>
+		<!--	<Text text="{Mrmin}"/> -->
+			<Text text="{ path: 'Mrmin', type: 'sap.ui.model.type.Float' }"/>
+				<Text text="{Mrmax}"/>
+				<!--<Input id="Cntrc" value="{Cntrc}" />-->
+				<Input id="Cntrc" value="{ path: 'Cntrc', type: 'sap.ui.model.type.Float', formatOptions: { minFractionDigits: 2, maxFractionDigits: 2 } }"/>
+				<Input id="Mdtxt" value="{Mdtxt}"/>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

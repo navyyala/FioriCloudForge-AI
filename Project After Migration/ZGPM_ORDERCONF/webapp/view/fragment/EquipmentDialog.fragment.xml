@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog close="handleEquipementDialogClose" confirm="handleEquipementDialogClose" id="sdEquipement" items="{path:'/FUNCLOCEQUISet'}"
+		noDataText="{i18n>textFragmentNoEquipement}" title="{i18n>textFragmentTitleEquipement}">
+		<StandardListItem description="{path: 'Equnr', formatter: '.removeLeadingZeros'}" title="{Description}" type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

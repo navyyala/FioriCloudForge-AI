@@ -1,0 +1,220 @@
+{
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "PO_MAINTENANCE",
+    "type": "application",
+    "title": "{{singleMasterTitle}}",
+    "description": "CMMS Corrective Order Confirmation",
+    "applicationVersion": {
+      "version": "1.1.0"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZGPM_CONFIRM_ORDER_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ZPMORDERCONF-DISPLAY_G": {
+          "semanticObject": "ZPMORDERCONF",
+          "action": "DISPLAY_G",
+          "title": "{{singleMasterTitle}}",
+          "signature": {
+            "parameters": {
+              "apptype": {
+                "defaultValue": {
+                  "value": "C"
+                }
+              }
+            },
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://approvals"
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": [
+      "sap_belize"
+    ]
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "PO_MAINTENANCE.view.Main",
+      "type": "XML",
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.71.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "useBatch": true,
+          "json": true
+        }
+      },
+      "orderitem": {
+        "dataSource": "mainService",
+        "preload": false,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "useBatch": true,
+          "json": true
+        }
+      },
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "PO_MAINTENANCE.i18n.messageBundle",
+          "supportedLocales": ["", "en", "fr", "de", "es", "pt"],
+          "fallbackLocale": ""
+        }
+      },
+      "device": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      },
+      "displaySettings": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      },
+      "userMode": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true,
+        "settings": {
+          "data": {
+            "admin": false,
+            "edit": false
+          }
+        }
+      },
+      "messageModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true,
+        "settings": {
+          "data": []
+        }
+      },
+      "PokayokeModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true,
+        "settings": {
+          "data": {
+            "PokayokeIDCode": ""
+          }
+        }
+      },
+      "assignment": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true,
+        "settings": {
+          "data": {
+            "technician": "",
+            "assigned": false,
+            "notAssigned": false
+          }
+        }
+      },
+      "checkBoxModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      },
+      "serialNumber": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true,
+        "settings": {
+          "data": {
+            "results": []
+          }
+        }
+      },
+      "external": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true,
+        "settings": {
+          "data": {
+            "from": ""
+          }
+        }
+      },
+      "confirmText": {
+        "type": "sap.ui.model.json.JSONModel",
+        "preload": true
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "PO_MAINTENANCE.view",
+        "controlId": "fioriContent",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "main",
+          "target": "master"
+        },
+        {
+          "pattern": "{entity}/:from:",
+          "name": "details",
+          "target": "details"
+        }
+      ],
+      "targets": {
+        "master": {
+          "viewName": "Master",
+          "viewLevel": 1
+        },
+        "details": {
+          "viewName": "Details",
+          "viewLevel": 2
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewLevel": 3
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/fullScreenStyles.css"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <l:VerticalLayout width="100%">
+    <l:content>
+    	<!-- i18n>/PokayokeIDCode -->
+		<Label text="{i18n>enterPokayokeCode}" />
+        <Input value="{PokayokeModel>/PokayokeIDCode}" maxLength="20"/>
+    </l:content>
+  </l:VerticalLayout>
+</core:FragmentDefinition>
