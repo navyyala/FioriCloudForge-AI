@@ -78,9 +78,9 @@
 | Metric | Value |
 |---|---|
 | Manual Effort Estimate | 35 developer-days (Senior Dev) |
-| Agent-Assisted Actual (incl. human review at each phase gate) | ~2–3 days |
+| Agent-Assisted Actual (incl. human review at each phase gate) | ~4–5 days |
 | Time Saved | ~32–33 developer-days |
-| Effort Reduction | **~91–94%** |
+| Effort Reduction | **~80–90%** |
 
 ---
 
