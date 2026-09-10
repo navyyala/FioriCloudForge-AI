@@ -226,6 +226,23 @@ For every modified file generate:
 
 ---
 
+---
+
+## Application Execution Validation
+
+After implementation and modernization activities are completed:
+
+Run the application locally and validate functionality.
+
+### Execute
+
+Start the application using UI5 Tooling.
+
+```bash
+npm install
+``
+---
+
 ## Migration Report
 
 Present the following migration report:
