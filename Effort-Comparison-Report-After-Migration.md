@@ -37,15 +37,15 @@
 | Phase 1 Analysis & Discovery | 2 days |
 | Project scaffolding (ui5.yaml, package.json, etc.) | 1 day |
 | `manifest.json` creation | 2 days |
-| Component.js + Master.controller rewrite | 4 days |
-| Details.controller modernisation (3200 lines) | 6 days |
+| Component.js + Master.controller rewrite | 2 days |
+| Details.controller modernisation (3200 lines) | 3 days |
 | messages.js + stockOutputHelper rewrite | 1 day |
-| View XML fixes (3 views + 27 fragments review) | 3 days |
-| Unit test creation | 3 days |
-| OPA5 test creation | 5 days |
-| Phase 3 documentation | 5 days |
-| Bug fixes (routing, xmlns, fragment null guards) | 3 days |
-| **Total Manual** | **35 days** |
+| View XML fixes (3 views + 27 fragments review) | 2 days |
+| Unit test creation | 2 days |
+| OPA5 test creation | 2 days |
+| Phase 3 documentation | 2 days |
+| Bug fixes (routing, xmlns, fragment null guards) | 1 days |
+| **Total Manual** | **20 days** |
 
 > Assumes 1 Senior SAP UI5 Developer working alone, 8h/day.
 
@@ -67,7 +67,7 @@
 | Phase 3 documentation (agent execution) | ~25 min |
 | **Human review & sign-off — Phase 3 validation, rollback, deployment readiness** | **~2 hours** |
 | **Human-led iteration & retesting cycles** | **~4 hours** |
-| **Total Agent-Assisted (incl. human-in-loop review)** | **~2–3 days** |
+| **Total Agent-Assisted (incl. human-in-loop review)** | **~3–4 days** |
 
 > Agent execution across all phases totals under 4 hours combined. The majority of elapsed time (~12 hours) is human review and approval at each phase gate (Analysis → Implementation → Validation), plus retesting — as required by the migration workflow.
 
@@ -77,10 +77,10 @@
 
 | Metric | Value |
 |---|---|
-| Manual Effort Estimate | 35 developer-days (Senior Dev) |
+| Manual Effort Estimate | 20 developer-days (Senior Dev) |
 | Agent-Assisted Actual (incl. human review at each phase gate) | ~4–5 days |
-| Time Saved | ~32–33 developer-days |
-| Effort Reduction | **~80–90%** |
+| Time Saved | ~15–16 developer-days |
+| Effort Reduction | **~70–80%** |
 
 ---
 
