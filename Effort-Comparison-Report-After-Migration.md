@@ -1,6 +1,6 @@
 # Effort Comparison Report — ZGPM_ORDERCONF Migration
 
-**Date:** 2026-08-17  
+**Date:** 2026-09-10  
 **Methodology:** SAP Web IDE → BAS/VS Code + UI5 Tooling
 
 ---
